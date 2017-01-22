@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Helpdesk Management</title>
+</head>
+<body>
+<def>
+<style>
+    @font-face {
+    	font-family: 'Verdana';
+        font-weight: normal;
+	    font-style: normal;
+    }
+		
+    body
+    {
+		margin-left: 200px;
+		margin-top: 100px;
+		width: 600px;
+		height: 400px;
+        font-family: 'Verdana';
+        font-size: 1.0em;
+    }
+	    
+    #tableheader 
+    {
+        color: #5F6062;
+        background-color: yellow;
+        line-height: 2;
+    }
+</style>
+</def>
+    <h1 style='color: #5F6062; font-size: 15pt; font-weight: bold; font-family: Verdana;'>User Selection</h1>
+    <table border="0">
+        <tr id="tableheader">
+			<td colspan='2'>UserID</td>  
+			<td>Name</td>
+			<td>Role</td>
+			<td>Action</td>
+        </tr>
+		<tr>
+            <td><img height=40 src="res/img/jsmith.png"></td>
+			<td>jsmith</td>
+			<td>John Smith</td>
+			<td>CEO</td>
+			<td><a href="/login?selectedUser=jsmith&userDirectory=external">Login</a></td>
+        </tr>
+		<tr>
+            <td><img height=40 src="res/img/cevans.png"></td>
+			<td>cevans</td>
+			<td>Chris Evans</td>
+			<td>CTO</td>
+			<td><a href="/login?selectedUser=cevans&userDirectory=external">Login</a></td>
+        </tr>
+        <tr>
+            <td><img height=40 src="res/img/pramos.png" /></td>
+			<td>pramos</td>
+			<td>Pablo Ramos</td>
+			<td>IT Manager</td>
+			<td><a href="/login?selectedUser=pramos&userDirectory=external">Login</a></td>
+        </tr>
+    </table>
+</body>
+</html>
+		
