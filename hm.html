@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <!-- **********************************************************************************************************************************************************
+      This is sample web page with Qlik Sense sheets and charts embedded using Single integration. This use Helpdesk Management application.
+      *********************************************************************************************************************************************************** -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keyword" content="Qlik Mashup Dashboard Chart">
+
+    <title>Helpdesk Management</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="res/css/bootstrap.css" rel="stylesheet">
+	
+    <!--external css -->
+    <link href="res/font-awesome/css/font-awesome.css" rel="stylesheet" />
+	
+    <!-- Custom styles for this template -->
+    <link href="res/css/style.css" rel="stylesheet">
+    <link href="res/css/style-responsive.css" rel="stylesheet">
+
+	<script type="text/javascript">
+		
+	</script>
+       
+  </head>
+
+  <body>
+
+  <section id="container" >
+      <!-- **********************************************************************************************************************************************************
+      TOP BAR CONTENT & NOTIFICATIONS
+      *********************************************************************************************************************************************************** -->
+      <!--header start-->
+        <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <!--logo start-->
+            <a href="hm.html" class="logo"><b> Helpdesk Management</b></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  bookmarks and filter menu start -->
+                <ul class="nav top-menu">
+					<!--  bookmarks menu start -->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" data-toggle="tooltip" data-placement="left" title="Bookmarks" href="hm.html">
+                            <i class="fa fa-bookmark"></i>
+                            <span id="bookmark_flag" class="badge bg-theme"></span>
+                        </a>
+                        <ul class="dropdown-menu">                            
+                            <li>
+                                <a href="javascript:set_bookmark(1)" >
+									<span><b>1.</b>High Prority cases that have been opened for more than 1 month</span>
+								</a>
+                            </li>
+                           <li>
+                                <a href="javascript:set_bookmark(2)" >
+									<span><b>2.</b>Open cases that have been opened for more than 1 month</span>
+								</a>
+                            </li>
+							<li>
+                                <a href="javascript:set_bookmark(3)" >
+									<span><b>3.</b>Gerardo E. Ferroni's cases</span>
+								</a>
+                            </li>
+							<li>
+                                <a href="javascript:set_bookmark(0)" >
+									<i class="fa fa-times" aria-hidden="true"></i>
+									<span>Clear bookmark</span>
+								</a>
+                            </li>
+                        </ul>
+                    </li> <!--  bookmarks menu end -->
+                    <!--  filters menu start -->
+                    <li class="dropdown">
+                        <a data-toggle="dropdown" class="dropdown-toggle" data-toggle="tooltip" data-placement="left" title="Filters" href="hm.html">
+                            <i class="fa fa-filter"></i>
+                            <span id="priority_flag" class="badge bg-theme"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                             <li>
+                                <a href="javascript:set_priority(1)" >
+									<span><b>H</b>igh Priorty cases</span>
+								</a>
+                            </li>
+                           <li>
+                                <a href="javascript:set_priority(2)" >
+									<span><b>M</b>edium Priorty cases</span>
+								</a>
+                            </li>
+							<li>
+                                <a href="javascript:set_priority(3)" >
+									<span><b>L</b>ow Prority cases</span>
+								</a>
+                            </li>
+							<li>
+                                <a href="javascript:set_priority(0)" >
+									<i class="fa fa-times" aria-hidden="true"></i>
+									<span>Clear filter</span>
+								</a>
+                            </li>
+                        </ul>
+                    </li> <!-- filters menu end -->
+                </ul> <!--  bookmarks and filter menu end -->
+            </div>
+        </header> <!--header end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      MAIN SIDEBAR MENU
+      *********************************************************************************************************************************************************** -->
+      <!--sidebar start-->
+      <aside>
+          <div id="sidebar"  class="nav-collapse">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+              	  <p class="centered"><a href="hm.html"><img src="res/img/HM.png" class="img" width="180"></a></p>
+                  <li class="mt">
+                      <a a class="active" href="javascript:home_page()">
+                          <i class="fa fa-home"></i>
+                          <span>Home Page</span>
+                      </a>
+                  </li>
+				  <li class="sub-menu">
+                      <a href="javascript:menu_item(0)">
+                          <i class="fa fa-desktop"></i>
+                          <span>Dashboard</span>
+                      </a>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:menu_item(1);">
+                          <i class="fa fa-dashboard"></i>
+                          <span>Performance</span>
+                      </a>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:menu_item(2)" >
+                          <i class="fa fa-th"></i>
+                          <span>Case Details</span>
+                      </a>
+                  </li>
+				  <li class="sub-menu">
+                      <a href="javascript:menu_item(3)" >
+                          <i class="fa fa-cogs"></i>
+                          <span>Open Cases vs Duration</span>
+                      </a>
+                  </li>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside> <!--sidebar end-->
+      
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+      <!--main content start-->
+	<section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+			<!-- empty iframe for sheets selected from left side menu-->
+			<div class="col-md-12 col-sm-12 mb">
+			<iframe id="qs_iframe0" src="" width="0" height="0" frameborder="0"></iframe>
+			</div>
+			<!-- 3 divs an iframes for charts -->
+			<div class="col-md-4 col-sm-4 mb">
+				<iframe id="qs_iframe1" src="http://34.248.156.24/single/?appid=8d935b35-5e8b-47d3-b946-29babf6bd7ce&obj=RuTpzNW&opt=noanimate%2Cnointeraction" width="100%" height="330" frameborder="0"></iframe>
+			</div>
+			<div class="col-md-4 col-sm-4 mb">	
+				<iframe id="qs_iframe2" src="http://34.248.156.24/single/?appid=8d935b35-5e8b-47d3-b946-29babf6bd7ce&obj=JARjh&opt=noanimate%2Cnointeraction" width="100%" height="330" frameborder="0"></iframe>
+			</div>
+			<div class="col-md-4 col-sm-4 mb">	
+				<iframe id="qs_iframe3" src="http://34.248.156.24/single/?appid=8d935b35-5e8b-47d3-b946-29babf6bd7ce&obj=JsVPe&opt=noanimate%2Cnointeraction" width="100%" height="330" frameborder="0"></iframe>
+			</div>
+				<iframe id="qs_iframe4" src="http://34.248.156.24/single/?appid=8d935b35-5e8b-47d3-b946-29babf6bd7ce&obj=hRZaKk&opt=noanimate%2Cnointeraction" width="100%" height="300" frameborder="0"></iframe>
+			</div>
+        </section>
+	</section>  
+      <!--main content end-->
+      <!--footer start-->
+      <footer class="site-footer">
+          <div class="text-center">
+              2017 - Rob Mashup Factory
+              <a href="hm.html" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+      <!--footer end-->
+  </section>
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="res/js/jquery.js"></script>
+    <script src="res/js/jquery-1.8.3.min.js"></script>
+    <script src="res/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="res/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="res/js/jquery.scrollTo.min.js"></script>
+    <script src="res/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="res/js/jquery.sparkline.js"></script>
+	<script src="res/js/common-scripts.js"></script>
+ 
+	<!-- **********************************************************************************************************************************************************
+    WEB PAGE LOGIC
+    *********************************************************************************************************************************************************** -->
+	<script type="text/javascript">
+		
+		var page = 0; //flag, if 0 we are on home page 
+		var qs_link = ""; //url for left side menu options
+		var qs_bookmark = ""; //bookmark selected from top menu
+		var qs_priority = ""; //filter selected from top menu
+		//charts for home page
+		//KPI high priory cases
+		var link1 = "http://34.248.156.24/single/?appid=8d935b35-5e8b-47d3-b946-29babf6bd7ce&obj=RuTpzNW&opt=noanimate%2Cnointeraction";
+		//KPI medium priory cases
+		var link2 = "http://34.248.156.24/single/?appid=8d935b35-5e8b-47d3-b946-29babf6bd7ce&obj=JARjh&opt=noanimate%2Cnointeraction";
+		//KPI low priory cases
+		var link3 = "http://34.248.156.24/single/?appid=8d935b35-5e8b-47d3-b946-29babf6bd7ce&obj=JsVPe&opt=noanimate%2Cnointeraction";
+		//chart open and resoved cases over the time
+		var link4 = "http://34.248.156.24/single/?appid=8d935b35-5e8b-47d3-b946-29babf6bd7ce&obj=hRZaKk&opt=noanimate%2Cnointeraction";
+		
+		//bookmark top menu
+		function set_bookmark(item){
+			
+			var flag = "";
+
+			switch(item){
+                case 0: //clear bookmark
+					qs_bookmark = "&select=clearall";
+					flag = "";
+					break;
+				case 1: //High Prority cases that have been opened for more than 1 month
+					qs_bookmark = "&bookmark=amHCpq";
+					flag = item;
+					break;
+				case 2: //Open cases that have been opened for more than 1 month
+					qs_bookmark = "&bookmark=mpGQd";
+					flag = item;
+					break;
+				case 3: //Gerardo E. Ferroni's cases
+					qs_bookmark = "&bookmark=wvvjH";
+					flag = item;
+					break;
+				}
+			
+			if (page == 0) { 			
+				document.getElementById("qs_iframe1").src = link1 + qs_bookmark + qs_priority;
+				document.getElementById("qs_iframe2").src = link2 + qs_bookmark + qs_priority;
+				document.getElementById("qs_iframe3").src = link3 + qs_bookmark + qs_priority;
+				document.getElementById("qs_iframe4").src = link4 + qs_bookmark + qs_priority;
+				
+			} else {
+				document.getElementById("qs_iframe0").src = qs_link + qs_bookmark + qs_priority;
+			}
+			document.getElementById("bookmark_flag").innerHTML = flag;
+		}
+		
+		//Filter top menu 
+		function set_priority(item){
+			
+			var flag = "";
+
+			switch(item){
+                case 0: //clear filter
+					qs_priority = "&select=clearall";
+					flag = "";
+					break;
+				case 1: //High prority cases
+					qs_priority = "&select=Priority,High";
+					flag = "H";
+					break;
+				case 2: //Medium prority cases
+					qs_priority = "&select=Priority,Medium";
+					flag = "M";
+					break;
+				case 3: //Low prority cases
+					qs_priority = "&select=Priority,Low";
+					flag = "L";
+					break;
+				}
+			
+			if (page == 0) { 			
+				document.getElementById("qs_iframe1").src = link1 + qs_bookmark + qs_priority;
+				document.getElementById("qs_iframe2").src = link2 + qs_bookmark + qs_priority;
+				document.getElementById("qs_iframe3").src = link3 + qs_bookmark + qs_priority;
+				document.getElementById("qs_iframe4").src = link4 + qs_bookmark + qs_priority;
+				
+			} else {
+				document.getElementById("qs_iframe0").src = qs_link + qs_bookmark + qs_priority;
+			}
+			document.getElementById("priority_flag").innerHTML = flag;
+		}
+		
+		// left side menu without Home Page
+        function menu_item(item){
+			
+			page = 1; //we are no longer on home page
+            
+			switch(item){
+                case 0: //Sheet: Dashboard
+                    qs_link = "http://34.248.156.24/single/?appid=8d935b35-5e8b-47d3-b946-29babf6bd7ce&sheet=1ff88551-9c4d-41e0-b790-37f4c11d3df8&opt=currsel%2Cnoanimate";
+					break;
+				case 1: //Sheet: Performance
+                    qs_link = "http://34.248.156.24/single/?appid=8d935b35-5e8b-47d3-b946-29babf6bd7ce&sheet=kHgmg&opt=currsel%2Cnoanimate";
+                    break;
+				case 2: //Sheet: Case details
+                    qs_link = "http://34.248.156.24/single/?appid=8d935b35-5e8b-47d3-b946-29babf6bd7ce&sheet=VkcYvCR&opt=currsel%2Cnoanimate";
+                    break;
+                case 3: //Chart: Open Cases vs duration
+                    qs_link = "http://34.248.156.24/single/?appid=8d935b35-5e8b-47d3-b946-29babf6bd7ce&obj=298bbd6d-f23d-4469-94a2-df243d680e0c&opt=currsel%2Cnoanimate";
+                    break;
+            }
+			
+			//seleted link into iFrame
+            document.getElementById("qs_iframe0").src = qs_link + qs_bookmark +qs_priority;
+			document.getElementById("qs_iframe0").width = "100%";
+			document.getElementById("qs_iframe0").height = "700";
+			//clear other iframes
+			document.getElementById("qs_iframe1").src = "";
+			document.getElementById("qs_iframe1").width = "0";
+			document.getElementById("qs_iframe1").height = "0";
+			document.getElementById("qs_iframe2").src = "";
+			document.getElementById("qs_iframe2").width = "0";
+			document.getElementById("qs_iframe2").height = "0";
+			document.getElementById("qs_iframe3").src = "";
+			document.getElementById("qs_iframe3").width = "0";
+			document.getElementById("qs_iframe3").height = "0";
+			document.getElementById("qs_iframe4").src = "";
+			document.getElementById("qs_iframe4").width = "0";
+			document.getElementById("qs_iframe4").height = "0";
+        }
+		
+		// left side menu Home Page only
+		function home_page(){
+
+			page = 0; //we are on home page now
+			
+			//clear iFrame for sheets
+            document.getElementById("qs_iframe0").src = "";
+			document.getElementById("qs_iframe0").width = "0";
+			document.getElementById("qs_iframe0").height = "0";
+			//set other iframes
+			document.getElementById("qs_iframe1").src = link1 + qs_bookmark + qs_priority;
+			document.getElementById("qs_iframe1").width = "100%";
+			document.getElementById("qs_iframe1").height = "330";
+			document.getElementById("qs_iframe2").src = link2 + qs_bookmark + qs_priority;
+			document.getElementById("qs_iframe2").width = "100%";
+			document.getElementById("qs_iframe2").height = "330";
+			document.getElementById("qs_iframe3").src = link3 + qs_bookmark + qs_priority;
+			document.getElementById("qs_iframe3").width = "100%";
+			document.getElementById("qs_iframe3").height = "330";
+			document.getElementById("qs_iframe4").src = link4 + qs_bookmark + qs_priority;
+			document.getElementById("qs_iframe4").width = "100%";
+			document.getElementById("qs_iframe4").height = "300";
+        }
+		
+	</script>
+	
+	<script type="application/javascript">
+       
+    </script>
+  
+
+  </body>
+</html>
